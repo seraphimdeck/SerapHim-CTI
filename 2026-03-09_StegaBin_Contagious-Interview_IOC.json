@@ -1,0 +1,410 @@
+{
+  "type": "bundle",
+  "id": "bundle--a3f1c2d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+  "objects": [
+
+    {
+      "type": "threat-actor",
+      "spec_version": "2.1",
+      "id": "threat-actor--b1c2d3e4-f5a6-7b8c-9d0e-1f2a3b4c5d6e",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Famous Chollima",
+      "description": "North Korean state-sponsored threat cluster operating under the Lazarus Group umbrella. Financially motivated with a focus on cryptocurrency theft and developer-targeted supply chain intrusions.",
+      "threat_actor_types": ["nation-state"],
+      "aliases": ["Lazarus Group", "HIDDEN COBRA", "Guardians of Peace"],
+      "sophistication": "advanced",
+      "resource_level": "government",
+      "primary_motivation": "financial-gain",
+      "labels": ["nation-state", "lazarus-group", "famous-chollima", "dprk"]
+    },
+
+    {
+      "type": "campaign",
+      "spec_version": "2.1",
+      "id": "campaign--c2d3e4f5-a6b7-8c9d-0e1f-2a3b4c5d6e7f",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Contagious Interview",
+      "description": "Ongoing supply chain intrusion campaign operated by Famous Chollima since at least May 2025. Targets software developers via typosquatting malicious packages published to npm. The StegaBin wave (February 2026) introduced character-level text steganography via Pastebin dead-drop resolvers to obfuscate C2 infrastructure.",
+      "first_seen": "2025-05-01T00:00:00.000Z",
+      "last_seen": "2026-03-08T04:00:00.000Z",
+      "aliases": ["StegaBin"],
+      "labels": ["supply-chain", "npm", "steganography", "contagious-interview", "stegabin"]
+    },
+
+    {
+      "type": "malware",
+      "spec_version": "2.1",
+      "id": "malware--d3e4f5a6-b7c8-9d0e-1f2a-3b4c5d6e7f8a",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "StegaBin Loader",
+      "description": "Primary malicious payload located at vendor/scrypt-js/version.js in all 26 malicious npm packages. Heavily obfuscated with RC4 string encryption, array rotation, anti-debug, and control flow flattening. Functions as a text steganography decoder that fetches Pastebin dead-drop URLs and extracts C2 domain names from character-level substitutions in essay text.",
+      "malware_types": ["dropper", "loader"],
+      "is_family": false,
+      "aliases": ["version.js", "sched"],
+      "architecture_execution_envs": ["x86", "x64", "arm64"],
+      "implementation_languages": ["javascript"],
+      "labels": ["loader", "steganography", "dead-drop", "obfuscated"]
+    },
+
+    {
+      "type": "malware",
+      "spec_version": "2.1",
+      "id": "malware--e4f5a6b7-c8d9-0e1f-2a3b-4c5d6e7f8a9b",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "StegaBin RAT and Infostealer Toolkit",
+      "description": "9-module post-exploitation toolkit deployed automatically by C2 upon RAT connection. Modules include: VS Code persistence (vs), keylogger and clipboard stealer (clip), Python browser credential stealer (bro), Node.js crypto wallet and browser stealer (j), filesystem sweep (z), interactive RAT with FTP exfiltration (n), TruffleHog secret scanner (truffle), Git and SSH key theft (git), and StegaBin loader redeployed as persistence mechanism (sched).",
+      "malware_types": ["remote-access-trojan", "infostealer", "keylogger"],
+      "is_family": true,
+      "architecture_execution_envs": ["x86", "x64", "arm64"],
+      "implementation_languages": ["javascript", "python"],
+      "labels": ["rat", "infostealer", "keylogger", "credential-stealer", "crypto-stealer"]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f5a6b7c8-d9e0-1f2a-3b4c-5d6e7f8a9b0c",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Supply Chain Compromise: Compromise Software Dependencies and Development Tools",
+      "description": "26 malicious npm packages published to public registry, each typosquatting widely-used libraries.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1195.001",
+          "url": "https://attack.mitre.org/techniques/T1195/001/"
+        }
+      ]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a6b7c8d9-e0f1-2a3b-4c5d-6e7f8a9b0c1d",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Obfuscated Files or Information: Steganography",
+      "description": "C2 URLs encoded via character-level substitution in Pastebin essay text. 972 characters hidden across 15,191 characters, extracted at evenly-spaced intervals of 15 characters.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1027.003",
+          "url": "https://attack.mitre.org/techniques/T1027/003/"
+        }
+      ]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b7c8d9e0-f1a2-3b4c-5d6e-7f8a9b0c1d2e",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Web Service: Dead Drop Resolver",
+      "description": "Pastebin used as intermediary to resolve 31 Vercel-hosted C2 domains. Three Pastebin URLs hardcoded in fallback chain for resilience.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1102.001",
+          "url": "https://attack.mitre.org/techniques/T1102/001/"
+        }
+      ]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c8d9e0f1-a2b3-4c5d-6e7f-8a9b0c1d2e3f",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Boot or Logon Autostart Execution",
+      "description": "VS Code tasks.json persistence via runOn: folderOpen trigger. Malicious command preceded by 186 spaces to push payload off-screen in VS Code task viewer. Cross-platform.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547",
+          "url": "https://attack.mitre.org/techniques/T1547/"
+        }
+      ]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d9e0f1a2-b3c4-5d6e-7f8a-9b0c1d2e3f4a",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Input Capture: Keylogging",
+      "description": "WH_KEYBOARD_LL hook via PowerShell/C# on Windows, xinput test-xi2 on Linux, CGEventTap native addon on macOS. Active window title tracking including browser URL extraction.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1056.001",
+          "url": "https://attack.mitre.org/techniques/T1056/001/"
+        }
+      ]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e0f1a2b3-c4d5-6e7f-8a9b-0c1d2e3f4a5b",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Credentials from Password Stores: Credentials from Web Browsers",
+      "description": "Targets Chrome, Brave, Firefox, Opera, and Microsoft Edge credential stores. On macOS also targets iCloud Keychain. 86 cryptocurrency wallet extension IDs targeted including MetaMask, Phantom, Coinbase Wallet, Binance, Trust, Exodus, and Keplr.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1555.003",
+          "url": "https://attack.mitre.org/techniques/T1555/003/"
+        }
+      ]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f1a2b3c4-d5e6-7f8a-9b0c-1d2e3f4a5b6c",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Unsecured Credentials: Credentials In Files",
+      "description": "TruffleHog v3.92.5 downloaded from official GitHub releases and used to scan victim filesystem for secrets and API keys. Results uploaded to C2 then deleted.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552.001",
+          "url": "https://attack.mitre.org/techniques/T1552/001/"
+        }
+      ]
+    },
+
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a2b3c4d5-e6f7-8a9b-0c1d-2e3f4a5b6c7d",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Exfiltration Over C2 Channel",
+      "description": "Data exfiltrated via WebSocket to 103.106.67.63:1247, FTP bulk upload via basic-ftp, and HTTP POST to 103.106.67.63:1244. Clipboard data uploaded every 10 minutes.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1041",
+          "url": "https://attack.mitre.org/techniques/T1041/"
+        }
+      ]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--b3c4d5e6-f7a8-9b0c-1d2e-3f4a5b6c7d8e",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "C2 IP Address",
+      "description": "Primary C2 server. RAT connects to port 1244, WebSocket RAT on port 1247. Hosted on AS23470 ReliableSite.Net LLC.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[ipv4-addr:value = '103.106.67.63']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "labels": ["c2", "rat", "websocket"]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--c4d5e6f7-a8b9-0c1d-2e3f-4a5b6c7d8e9f",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Pastebin Dead-Drop Primary URL",
+      "description": "Primary Pastebin dead-drop containing steganographically encoded C2 domain list. User: davidsouza23. 353 views at time of analysis. Offline as of March 8, 2026.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[url:value = 'https://pastebin.com/raw/CJ5PrtNk']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "valid_until": "2026-03-08T04:00:00.000Z",
+      "labels": ["dead-drop", "pastebin", "steganography"]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--d5e6f7a8-b9c0-1d2e-3f4a-5b6c7d8e9f0a",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Pastebin Dead-Drop Fallback URL 1",
+      "description": "First fallback Pastebin dead-drop. User: Edgar04231. 15 views. Returned HTTP 404 during independent analysis on March 8, 2026.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[url:value = 'https://pastebin.com/raw/0ec7i68M']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "valid_until": "2026-03-08T02:30:00.000Z",
+      "labels": ["dead-drop", "pastebin", "fallback"]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--e6f7a8b9-c0d1-2e3f-4a5b-6c7d8e9f0a1b",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Pastebin Dead-Drop Fallback URL 2",
+      "description": "Second fallback Pastebin dead-drop. User: Edgar04231. 19 views. Returned HTTP 404 during independent analysis on March 8, 2026.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[url:value = 'https://pastebin.com/raw/DjDCxcsT']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "valid_until": "2026-03-08T02:30:00.000Z",
+      "labels": ["dead-drop", "pastebin", "fallback"]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--f7a8b9c0-d1e2-3f4a-5b6c-7d8e9f0a1b2c",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Active Vercel C2 Domain",
+      "description": "Primary active Vercel C2 domain at time of Socket analysis. Serves platform-specific shell payloads. Non-curl user-agents receive decoy response.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[domain-name:value = 'ext-checkdin.vercel.app']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "labels": ["c2", "vercel", "payload-delivery"]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a8b9c0d1-e2f3-4a5b-6c7d-8e9f0a1b2c3d",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "StegaBin Loader SHA-256",
+      "description": "SHA-256 hash of vendor/scrypt-js/version.js present in all 26 malicious packages. Same hash confirmed for sched persistence module, proving identical file.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[file:hashes.'SHA-256' = 'da1775d0fbe99fbc35b6f0b4a3a3cb84da3ca1b2c1bbac0842317f6f804e30a4']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "labels": ["hash", "loader", "npm"]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--b9c0d1e2-f3a4-5b6c-7d8e-9f0a1b2c3d4e",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Shared Member Identifier String",
+      "description": "String THKASDFOWG used as member identifier across all 9 post-exploitation modules. Useful for network and memory-based detection.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[artifact:payload_bin = 'THKASDFOWG']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "labels": ["string", "c2-marker", "detection"]
+    },
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--c0d1e2f3-a4b5-6c7d-8e9f-0a1b2c3d4e5f",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "name": "Malicious npm Package: loadash-lint",
+      "description": "Typosquats the widely-used lodash library. Contains malicious install.js lifecycle hook.",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[software:name = 'loadash-lint' AND software:version = '4.17.24']",
+      "pattern_type": "stix",
+      "valid_from": "2026-02-25T00:00:00.000Z",
+      "labels": ["npm", "typosquatting", "supply-chain"]
+    },
+
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--d1e2f3a4-b5c6-7d8e-9f0a-1b2c3d4e5f6a",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "relationship_type": "attributed-to",
+      "source_ref": "campaign--c2d3e4f5-a6b7-8c9d-0e1f-2a3b4c5d6e7f",
+      "target_ref": "threat-actor--b1c2d3e4-f5a6-7b8c-9d0e-1f2a3b4c5d6e",
+      "description": "Contagious Interview campaign attributed to Famous Chollima based on TTPs, infrastructure patterns, and overlap with previously documented activity."
+    },
+
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--e2f3a4b5-c6d7-8e9f-0a1b-2c3d4e5f6a7b",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "campaign--c2d3e4f5-a6b7-8c9d-0e1f-2a3b4c5d6e7f",
+      "target_ref": "malware--d3e4f5a6-b7c8-9d0e-1f2a-3b4c5d6e7f8a",
+      "description": "Contagious Interview StegaBin wave uses the StegaBin Loader as primary payload in all 26 malicious npm packages."
+    },
+
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--f3a4b5c6-d7e8-9f0a-1b2c-3d4e5f6a7b8c",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "campaign--c2d3e4f5-a6b7-8c9d-0e1f-2a3b4c5d6e7f",
+      "target_ref": "malware--e4f5a6b7-c8d9-0e1f-2a3b-4c5d6e7f8a9b",
+      "description": "Contagious Interview StegaBin wave deploys 9-module RAT and infostealer toolkit upon successful C2 connection."
+    },
+
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--a4b5c6d7-e8f9-0a1b-2c3d-4e5f6a7b8c9d",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "threat-actor--b1c2d3e4-f5a6-7b8c-9d0e-1f2a3b4c5d6e",
+      "target_ref": "attack-pattern--a6b7c8d9-e0f1-2a3b-4c5d-6e7f8a9b0c1d",
+      "description": "Famous Chollima uses text steganography to encode C2 URLs within Pastebin pastes."
+    },
+
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--b5c6d7e8-f9a0-1b2c-3d4e-5f6a7b8c9d0e",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "threat-actor--b1c2d3e4-f5a6-7b8c-9d0e-1f2a3b4c5d6e",
+      "target_ref": "attack-pattern--b7c8d9e0-f1a2-3b4c-5d6e-7f8a9b0c1d2e",
+      "description": "Famous Chollima uses Pastebin as a dead-drop resolver to retrieve Vercel-hosted C2 domains."
+    },
+
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--c6d7e8f9-a0b1-2c3d-4e5f-6a7b8c9d0e1f",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--b3c4d5e6-f7a8-9b0c-1d2e-3f4a5b6c7d8e",
+      "target_ref": "malware--e4f5a6b7-c8d9-0e1f-2a3b-4c5d6e7f8a9b",
+      "description": "IP 103.106.67.63 is the C2 server for the StegaBin RAT and infostealer toolkit."
+    },
+
+    {
+      "type": "note",
+      "spec_version": "2.1",
+      "id": "note--d7e8f9a0-b1c2-3d4e-5f6a-7b8c9d0e1f2a",
+      "created": "2026-03-09T00:00:00.000Z",
+      "modified": "2026-03-09T00:00:00.000Z",
+      "abstract": "Analysis Limitations",
+      "content": "This STIX bundle was produced by SerapHim, Independent Cyber Threat Intelligence, based on independent analysis conducted on March 8, 2026 and corroborated by Socket Security and kmsec.uk disclosures. Full steganographic decode was not completed due to an offset calculation error and subsequent infrastructure takedown. IOC data for the 9-module toolkit is sourced from Socket Security's published research. All indicators are defanged in the full report. TLP:WHITE.",
+      "object_refs": ["campaign--c2d3e4f5-a6b7-8c9d-0e1f-2a3b4c5d6e7f"]
+    }
+
+  ]
+}
