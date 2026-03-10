@@ -1,5 +1,4 @@
 # SerapHim-CTI
-
 Independent Cyber Threat Intelligence reports covering active threat campaigns and attacker TTPs.
 
 ---
@@ -16,7 +15,7 @@ Reports follow industry standards including MITRE ATT&CK mapping and STIX 2.1 IO
 
 | # | Campaign | Date | TLP | Files |
 |---|----------|------|-----|-------|
-| 001 | StegaBin — Contagious Interview (Famous Chollima) | 2026-03-09 | TLP:WHITE | · [IOC Bundle](2026-03-09_StegaBin_Contagious-Interview_IOC.json) |
+| 001 | StegaBin — Contagious Interview (Famous Chollima) | 2026-03-09 | TLP:WHITE | [IOC Bundle](2026-03-09_StegaBin_Contagious-Interview_IOC.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69ae83674395d9aba21757a6) |
 
 ---
 
@@ -34,4 +33,4 @@ YYYY-MM-DD_CampaignName_ThreatActor_FileType.ext
 
 ---
 
-*All content is produced independently for educational and defensive purposes. TLP:WHITE materials may be shared freely with attribution.*
+*All content is produced independently for educational and defensive purposes. TLP:WHITE materials may be shared freely with attribution. TLP:GREEN materials are intended for community distribution within relevant security organizations.*
