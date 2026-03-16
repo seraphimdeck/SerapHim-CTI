@@ -15,8 +15,8 @@ Reports follow industry standards including MITRE ATT&CK mapping and STIX 2.1 IO
 
 | # | Campaign | Date | TLP | Files |
 |---|----------|------|-----|-------|
-| 001 | StegaBin — Contagious Interview (Famous Chollima) | 2026-03-09 | TLP:WHITE | [IOC Bundle](2026-03-09_StegaBin_Contagious-Interview_IOC.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69ae83674395d9aba21757a6) |
-| 002 | Dust Specter — State-Sponsored OSINT Operation Targeting Iraqi Diplomatic Infrastructure | 2026-03-10 | TLP:CLEAR | [Report](DustSpecter_CTI-Report.pdf) |
+| 001 | StegaBin — Contagious Interview (Famous Chollima) | 2026-03-09 | TLP:WHITE | [IOC Bundle](CTI-001-StegaBin-IOC.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69ae83674395d9aba21757a6) | [PDF file](https://drive.google.com/file/d/1tz18t0Pq9C2ssiJwtj-GW-4iOJgpxbEj/view?usp=sharing)
+| 002 | Dust Specter — State-Sponsored OSINT Operation Targeting Iraqi Diplomatic Infrastructure | 2026-03-10 | TLP:CLEAR | [Report](CTI-002-DustSpecter.pdf) |
 
 ---
 
