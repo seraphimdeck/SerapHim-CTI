@@ -16,7 +16,7 @@ Reports follow industry standards including MITRE ATT&CK mapping and STIX 2.1 IO
 | # | Campaign | Date | TLP | Files |
 |---|----------|------|-----|-------|
 | 001 | StegaBin — Contagious Interview (Famous Chollima)| 2026-03-09 | TLP:WHITE | [IOC Bundle](CTI-001-StegaBin-IOC.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69ae83674395d9aba21757a6) · [PDF File](CTI-001-StegaBinWave.pdf)
-| 002 | DustSpecter | 2026--3-10 | TLP:GREEN | [IOC Bundle](CTI-002-DustSpecter.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad38424960add8f7af573) · [PDF File](CTI-002-DustSpecter.pdf)
+| 002 | DustSpecter | 2026-03-10 | TLP:GREEN | [IOC Bundle](CTI-002-DustSpecter.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad38424960add8f7af573) · [PDF File](CTI-002-DustSpecter.pdf)
 | 003 | SparrowDoor | 2026-03-16 | TLP:GREEN | [IOC Bundle](CTI-003-SparrowDoor.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad1b5d2bd377cb523c071) · [PDF File](CTI-003-SparrowDoor.pdf)
 
 ---
