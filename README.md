@@ -15,9 +15,19 @@ Reports follow industry standards including MITRE ATT&CK mapping and STIX 2.1 IO
 
 | # | Campaign | Date | TLP | Files |
 |---|----------|------|-----|-------|
-| 001 | StegaBin — Contagious Interview (Famous Chollima)| 2026-03-09 | TLP:WHITE | [IOC Bundle](CTI-001-StegaBin-IOC.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69ae83674395d9aba21757a6) · [PDF File](CTI-001-StegaBinWave.pdf)
-| 002 | DustSpecter | 2026-03-10 | TLP:CLEAR | [IOC Bundle](CTI-002-DustSpecter.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad38424960add8f7af573) · [PDF File](CTI-002-DustSpecter.pdf)
-| 003 | SparrowDoor | 2026-03-16 | TLP:CLEAR | [IOC Bundle](CTI-003-SparrowDoor.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad1b5d2bd377cb523c071) · [PDF File](CTI-003-SparrowDoor.pdf)
+| 001 | StegaBin — Contagious Interview (Famous Chollima) | 2026-03-09 | TLP:WHITE | [IOC Bundle](CTI-001-StegaBin-IOC.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69ae83674395d9aba21757a6) · [PDF File](CTI-001-StegaBinWave.pdf) |
+| 002 | DustSpecter — State-Sponsored OSINT Operation Targeting Iraqi MFA | 2026-03-10 | TLP:CLEAR | [IOC Bundle](CTI-002-DustSpecter.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad38424960add8f7af573) · [PDF File](CTI-002-DustSpecter.pdf) |
+| 003 | SparrowDoor — FamousSparrow / Salt Typhoon (PRC) | 2026-03-16 | TLP:CLEAR | [IOC Bundle](CTI-003-SparrowDoor.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad1b5d2bd377cb523c071) · [PDF File](CTI-003-SparrowDoor.pdf) |
+
+---
+
+## Distribution Notes
+
+Reports published in this repository are TLP:CLEAR versions, cleared for public distribution. Each report exists in a full TLP:RED version containing additional strategic context, extended analysis, and sensitive assessments not suitable for unrestricted release.
+
+TLP:RED versions are available on request to vetted individuals and organizations within the threat intelligence community. TLP classifications follow the [FIRST TLP standard](https://www.first.org/tlp/).
+
+To request access, see Contact below.
 
 ---
 
@@ -31,7 +41,8 @@ CTI-CODE-CampaignName_ThreatActor_FileType.ext
 
 ## Contact
 
-- Medium: [@seraphimltd](https://seraphimltd.medium.com)
+For TLP:RED access requests or general inquiries:
+contact.syntaxltd@gmail.com
 
 ---
 
