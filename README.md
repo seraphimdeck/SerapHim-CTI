@@ -18,7 +18,7 @@ Reports follow industry standards including MITRE ATT&CK mapping and STIX 2.1 IO
 | 001 | StegaBin — Contagious Interview (Famous Chollima) | 2026-03-09 | TLP:WHITE | [IOC Bundle](CTI-001-StegaBin-IOC.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69ae83674395d9aba21757a6) · [PDF File](CTI-001-StegaBinWave.pdf) |
 | 002 | DustSpecter — State-Sponsored OSINT Operation Targeting Iraqi MFA | 2026-03-10 | TLP:CLEAR | [IOC Bundle](CTI-002-DustSpecter.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad38424960add8f7af573) · [PDF File](CTI-002-DustSpecter.pdf) |
 | 003 | SparrowDoor — FamousSparrow / Salt Typhoon (PRC) | 2026-03-16 | TLP:CLEAR | [IOC Bundle](CTI-003-SparrowDoor.json) · [OTX Pulse](https://otx.alienvault.com/pulse/69bad1b5d2bd377cb523c071) · [PDF File](CTI-003-SparrowDoor.pdf) · [PDF File V2](CTI-003-SparrowDoor-V2.pdf)|
-| 004 | SparrowDoor Espionage china-nexus | 2026-03-29 | TLP:CLEAR |  · [PDF File](CTI-004-SparrowDoor-Modular.pdf) |
+| 004 | SparrowDoor - Modular Variant (2024) with Analytical Continuation of CTI-003 | 2026-03-29 | TLP:CLEAR |  · [PDF File](CTI-004-SparrowDoor-Modular.pdf) |
 
 ---
 
