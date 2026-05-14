@@ -122,13 +122,43 @@
       "created": "2026-03-16T00:00:00.000Z",
       "modified": "2026-03-16T00:00:00.000Z",
       "name": "[PHIM] Inverted anti-sandbox -- TerminateProcess on IsDebuggerPresent==0",
-      "description": "SparrowDoor terminates via TerminateProcess with exception code 0xc0000409 (STATUS_STACK_BUFFER_OVERRUN) when IsDebuggerPresent returns 0 (no debugger detected). Inverted from conventional anti-debug: malware runs normally when debugger IS present (sandbox environments attach no debugger). Masquerades deliberate termination as compiler security feature. Entry: DllMain at 0x100016a1, anti-sandbox logic at FUN_100016c4. Not documented in prior public vendor reporting at time of publication.",
+      "description": "SparrowDoor terminates via TerminateProcess with exception code 0xc0000409 (STATUS_STACK_BUFFER_OVERRUN) when IsDebuggerPresent returns 0 (no debugger detected). Inverted from conventional anti-debug: malware runs normally when debugger IS present (sandbox environments attach no debugger). Masquerades deliberate termination as compiler security feature. Entry: DllMain at 0x100016a1, anti-sandbox logic at FUN_100016c4. Confirmed by Ghidra static disassembly. Not documented in prior public vendor reporting at time of publication. Confidence: MODERATE -- technique confirmed from disassembly, operational function unresolved without dynamic analysis.",
       "indicator_types": ["malicious-activity", "anomalous-activity"],
-      "pattern": "[process:opened_connections[*].dst_port > 0 AND process:command_line MATCHES 'TerminateProcess']",
+      "pattern": "[file:hashes.'SHA-256' = '8dfaa1f579de14bca8bb27c54a57dd87646a835969766ca9ddb81ecd9329f4e4' AND file:extensions.'windows-pebinary-ext'.file_header_hashes.'SHA-256' = '8dfaa1f579de14bca8bb27c54a57dd87646a835969766ca9ddb81ecd9329f4e4']",
       "pattern_type": "stix",
       "valid_from": "2019-08-01T00:00:00.000Z",
       "created_by_ref": "identity--seraphim-independent-cti",
       "labels": ["anti-sandbox", "anti-analysis", "phim", "famoussparrow", "yara-candidate"]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--behavior-substitution-tables",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "name": "[PHIM] Three-table character substitution system -- API-free case normalization",
+      "description": "Three lookup tables in .rdata for bidirectional case-insensitive string matching without Windows API calls (lstrcmpiA, CompareStringA). Table 1 (0x10008898): identity/passthrough. Table 2 (0x10008ea1): uppercase-to-lowercase (A-Z -> a-z). Table 3 (0x10009021): lowercase-to-uppercase (a-z -> A-Z). Enables C2 command normalization while evading import-based detection. Not documented in ESET, UK NCSC, Trend Micro, or Microsoft FamousSparrow reporting. Confirmed by Ghidra memory search (string '!\"#$%&', US-ASCII, Search All). YARA candidate: three-table byte sequence beginning 0x10008898.",
+      "indicator_types": ["malicious-activity", "anomalous-activity"],
+      "pattern": "[file:hashes.'SHA-256' = '8dfaa1f579de14bca8bb27c54a57dd87646a835969766ca9ddb81ecd9329f4e4']",
+      "pattern_type": "stix",
+      "valid_from": "2019-08-01T00:00:00.000Z",
+      "created_by_ref": "identity--seraphim-independent-cti",
+      "labels": ["obfuscation", "import-evasion", "phim", "famoussparrow", "yara-candidate"]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--behavior-indirect-call-density",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "name": "[PHIM] Indirect call density -- 113 FF 15 sites in 26KB binary",
+      "description": "113 indirect call sites (opcode FF 15: CALL [mem]) identified in .text section, address range 0x10001042-0x100070df, across a 26KB binary (~1 per 230 bytes). Static IAT inspection surfaces only ~60 visible KERNEL32 functions. The 113 FF 15 sites represent the hidden runtime call footprint -- network, registry, cryptographic operations resolved dynamically. Confirmed by Ghidra memory search (hex FF 15, Search All). Not documented in prior public vendor reporting.",
+      "indicator_types": ["malicious-activity", "anomalous-activity"],
+      "pattern": "[file:hashes.'SHA-256' = '8dfaa1f579de14bca8bb27c54a57dd87646a835969766ca9ddb81ecd9329f4e4']",
+      "pattern_type": "stix",
+      "valid_from": "2019-08-01T00:00:00.000Z",
+      "created_by_ref": "identity--seraphim-independent-cti",
+      "labels": ["obfuscation", "anti-analysis", "phim", "famoussparrow"]
     },
     {
       "type": "attack-pattern",
@@ -161,6 +191,17 @@
       "name": "Process Injection: DLL Injection (T1055.001)",
       "description": "Reflective loading of MpSvc.dll into memory via VirtualAlloc + VirtualProtect + manual PE parsing. Stage 2 never written to disk as standalone file.",
       "external_references": [{"source_name": "mitre-attack", "external_id": "T1055.001"}],
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--t1497-sandbox-evasion",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "name": "Virtualization/Sandbox Evasion (T1497)",
+      "description": "[PHIM] Inverted anti-sandbox logic: SparrowDoor calls IsDebuggerPresent and terminates via TerminateProcess with exception code 0xc0000409 (STATUS_STACK_BUFFER_OVERRUN) when no debugger is detected (return value 0). Conventional anti-debug terminates when a debugger IS present. This inversion defeats automated sandboxes (Cuckoo, ANY.RUN, Joe Sandbox) which do not attach debuggers, causing IsDebuggerPresent to return 0 and triggering process termination. The exception code masquerades the deliberate kill as a compiler-triggered stack buffer overrun. A human analyst with a debugger attached proceeds normally. DllMain entry at 0x100016a1, anti-sandbox logic at FUN_100016c4. Not documented in prior public vendor reporting at time of publication.",
+      "external_references": [{"source_name": "mitre-attack", "external_id": "T1497"}],
       "created_by_ref": "identity--seraphim-independent-cti"
     },
     {
@@ -249,6 +290,116 @@
       "relationship_type": "indicates",
       "source_ref": "indicator--ip-c2-19812",
       "target_ref": "malware--sparrowdoor-loader-legacy",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1574002",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1574002-dll-sideloading",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1027",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1027-obfuscation",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1055001",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1055001-process-injection",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1497",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1497-sandbox-evasion",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1562001",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1562001-impair-defenses",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1140",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1140-deobfuscate",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1059003",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1059003-cmd",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--malware-uses-t1071001",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "malware--sparrowdoor-loader-legacy",
+      "target_ref": "attack-pattern--t1071001-web-protocols",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--actor-uses-t1574002",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "threat-actor--famoussparrow-salttyphoon",
+      "target_ref": "attack-pattern--t1574002-dll-sideloading",
+      "created_by_ref": "identity--seraphim-independent-cti"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--actor-uses-t1497",
+      "created": "2026-03-16T00:00:00.000Z",
+      "modified": "2026-03-16T00:00:00.000Z",
+      "relationship_type": "uses",
+      "source_ref": "threat-actor--famoussparrow-salttyphoon",
+      "target_ref": "attack-pattern--t1497-sandbox-evasion",
       "created_by_ref": "identity--seraphim-independent-cti"
     }
   ]
