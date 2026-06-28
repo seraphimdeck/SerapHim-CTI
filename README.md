@@ -5,7 +5,7 @@ Independent Cyber Threat Intelligence reports covering active threat campaigns a
 
 ## About
 
-This repository contains CTI reports produced by **SerapHim**, an independent cyber threat intelligence analyst. Each report is based on open-source research, technical analysis, and direct observation of malicious infrastructure.
+This repository contains CTI reports produced by **SerapHim**, an independent cyber threat intelligence analyst (managed and maintained by **ArapNigan**). Each report is based on open-source research, technical analysis, and direct observation of malicious infrastructure.
 
 Reports follow industry standards including MITRE ATT&CK mapping and STIX 2.1 IOC bundles where applicable.
 
@@ -46,6 +46,8 @@ For TLP:RED access requests or general inquiries:
 contact.syntaxltd@gmail.com
 
 ---
+
+> 💡 **Identity Note:** **SerapHim** is the research persona and pen name of **ArapNigan**. All analytical materials, signatures, and repositories under this name are authored and maintained by ArapNigan.
 
 ## License
 
