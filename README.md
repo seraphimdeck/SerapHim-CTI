@@ -32,14 +32,6 @@ To request access, see Contact below.
 
 ---
 
-## File Naming Convention
-
-```
-CTI-CODE-CampaignName_ThreatActor_FileType.ext
-```
-
----
-
 ## Contact
 
 For TLP:RED access requests or general inquiries:
